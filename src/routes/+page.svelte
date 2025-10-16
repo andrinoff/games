@@ -7,6 +7,7 @@
 		title: string;
 		description: string;
 		color: 'pink' | 'cyan' | 'amber'; // Using literal types for specific colors
+		endpoint?: string; // Optional endpoint for redirection
 	}
 
 	// Array of games to display, making it easy to add more!
@@ -15,20 +16,23 @@
 			emoji: '😈',
 			title: 'Truth or Dare',
 			description: 'The classic party starter. Will you tell all, or take on a challenge?',
-			color: 'pink'
-		},
-		{
-			emoji: '🤫',
-			title: 'Never Have I Ever',
-			description: "Discover your friends' wildest secrets with this revealing classic.",
-			color: 'cyan'
-		},
-		{
-			emoji: '🕵️',
-			title: 'Spy',
-			description: "One spy, many innocents. Can you find the impostor before it's too late?",
-			color: 'amber'
+			color: 'pink',
+			endpoint: 'truth-or-dare'
 		}
+		// {
+		// 	emoji: '🤫',
+		// 	title: 'Never Have I Ever',
+		// 	description: "Discover your friends' wildest secrets with this revealing classic.",
+		// 	color: 'cyan',
+		// 	endpoint: 'never-have-i-ever'
+		// },
+		// {
+		// 	emoji: '🕵️',
+		// 	title: 'Spy',
+		// 	description: "One spy, many innocents. Can you find the impostor before it's too late?",
+		// 	color: 'amber',
+		// 	endpoint: 'spy'
+		// }
 	];
 
 	let gameCards: NodeListOf<HTMLElement>;
@@ -87,8 +91,9 @@
 					<div class="mb-4 text-5xl">{game.emoji}</div>
 					<h2 class="mb-2 text-2xl font-bold">{game.title}</h2>
 					<p class="mb-6 flex-grow text-gray-400">{game.description}</p>
-					<button class="play-button w-full rounded-full px-8 py-3 font-bold shadow-lg"
-						>Play Now</button
+					<button
+						class="play-button w-full rounded-full px-8 py-3 font-bold shadow-lg"
+						on:click={() => (window.location.href = `/${game.endpoint}`)}>Play Now</button
 					>
 				</div>
 			</div>
